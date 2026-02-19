@@ -1,3 +1,5 @@
+[![CI](https://github.com/DaWeba02/servicestarter-vs/actions/workflows/ci.yml/badge.svg)](https://github.com/DaWeba02/servicestarter-vs/actions/workflows/ci.yml)
+
 # ServiceStarter.VS (.NET 8 Minimal API)
 
 Starter template with vertical-slice Minimal API, JWT auth, EF Core + SQL Server, Serilog, FluentValidation, ProblemDetails, health checks, Swagger (Dev), and Testcontainers-based integration tests—ready for local or Docker workflows.
