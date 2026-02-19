@@ -1,0 +1,37 @@
+# Build outputs
+bin/
+obj/
+TestResults/
+*.trx
+*.coverage
+*.coveragexml
+
+# IDE
+.vs/
+.vscode/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.userprefs
+*.sln.iml
+
+# Dotnet local/runtime
+.dotnet/
+*.dbmdl
+*.opendb
+
+# ReSharper / Rider
+_ReSharper*/
+*.ReSharper*/
+*.DotSettings.user
+
+# Logs
+*.log
+logs/
+
+# Secrets / config overrides
+**/appsettings.*.local.json
+
+# Docker / misc
+*.pid

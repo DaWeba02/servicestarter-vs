@@ -1,0 +1,31 @@
+version: "3.9"
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__Default=Server=db,1433;Database=servicestarter;User Id=sa;Password=Your_password123;TrustServerCertificate=True
+      - Jwt__Issuer=servicestarter
+      - Jwt__Audience=servicestarter
+      - Jwt__SigningKey=1D16BDE1-22BC-4886-867C-9330058A41D3-C32FE445-5A90-44FC-8D01-54A39A02D2AF
+      - Jwt__ExpiryMinutes=60
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+
+  db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=Your_password123
+    ports:
+      - "1433:1433"
+    volumes:
+      - mssql-data:/var/opt/mssql
+
+volumes:
+  mssql-data:

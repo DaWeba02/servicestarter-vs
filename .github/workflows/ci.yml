@@ -1,0 +1,45 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+env:
+  DOTNET_NOLOGO: true
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET 8
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+          cache: true
+
+      - name: Cache NuGet packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj') }}
+          restore-keys: |
+            ${{ runner.os }}-nuget-
+
+      - name: Restore
+        run: dotnet restore ServiceStarter.VS.sln
+
+      - name: Build
+        run: dotnet build ServiceStarter.VS.sln --no-restore --configuration Release
+
+      - name: Unit tests
+        run: dotnet test tests/ServiceStarter.UnitTests/ServiceStarter.UnitTests.csproj --no-build --configuration Release
+
+      - name: Integration tests
+        run: dotnet test tests/ServiceStarter.IntegrationTests/ServiceStarter.IntegrationTests.csproj --no-build --configuration Release
