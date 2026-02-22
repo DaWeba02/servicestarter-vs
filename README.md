@@ -48,3 +48,6 @@ Starter template with vertical-slice Minimal API, JWT auth, EF Core + SQL Server
 - `tests/ServiceStarter.UnitTests` — validators and small units.
 - `tests/ServiceStarter.IntegrationTests` — WebApplicationFactory + Testcontainers (auth, users, health, swagger, problem details).
 - `docker/` — Dockerfile, `docker-compose.yml`; `docs/` — reference material.
+
+## License
+This project is licensed under the MIT License – see the LICENSE file for details.
